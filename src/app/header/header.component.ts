@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataProviderService } from '../data-provider.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  inCart = this.dataProviderService.getData().length;
+
+  constructor(private dataProviderService: DataProviderService) {
+  	console.log('In cart: ' + this.inCart);
+  }
 
   ngOnInit() {
   }
+
 
 }

@@ -1,0 +1,32 @@
+<div class="form-inline cart">
+  <table class="table cart-table left">
+    <thead>
+      <tr>
+        <th class="table-header">ID</th>
+        <th class="table-header">Name</th>
+        <th class="table-header">Price(€)</th>
+        <th class="table-header">Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Price</td>
+        <td>
+           <button type="button" class="btn btn-xs btn-danger" (click)="remove()">
+              <span class="glyphicon glyphicon-remove-circle"></span>
+           </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="text-align: left;">
+  	<h3>Tax: 20%</h3>
+  	<h3>Total: 100€</h3>
+  	<h3>Total with tax: 120€</h3>
+  	<button type="button" class="btn btn-lg btn-success right checkout" (click)="checkout()">
+      Checkout
+  	</button>
+  </div>
+</div>
