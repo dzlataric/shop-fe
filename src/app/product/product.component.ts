@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
 import { DataProviderService } from '../data-provider.service';
 import { Product } from '../types/product';
@@ -18,7 +19,12 @@ export class ProductComponent implements OnInit {
   baseParameters: string = '/products?page=1&pageSize=6&search=';
   inCart: Product[];	
 
-  constructor(private http: HttpClient, private snackBar: MdSnackBar, private dataProviderService: DataProviderService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private snackBar: MdSnackBar,
+    private dataProviderService: DataProviderService
+  ) {}
 
   ngOnInit() {
     this.http.get<Product[]>(environment.API_URL + this.baseParameters).subscribe(data => {
@@ -33,11 +39,13 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-    this.snackBar.open('Name: ' + product.name, 'Price: ' + product.price + '€', {
+    this.dataProviderService.setData(product.id, product.name, product.category, product.price);
+    this.snackBar.open('Added to cart: ' + product.name, 'Price: ' + product.price + '€', {
       duration: 2000,
     });
   }
   getDetails(id: number) {
+    this.router.navigate(['/details/' + id]); 
     this.snackBar.open('Product detais are not available at the moment!', 'ID: ' + id, {
       duration: 2000,
     });

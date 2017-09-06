@@ -1,16 +1,14 @@
-  import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule }   from '@angular/router';
 
 import { AppComponent } from './app.component';
-import {HttpClientModule} from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {DataTableModule,SharedModule} from 'primeng/primeng';
-
-import {MdTableModule, MdButtonModule, MdIconModule, MdSnackBarModule} from '@angular/material';
+import {MdButtonModule, MdIconModule, MdSnackBarModule} from '@angular/material';
 
 import { DataProviderService } from './data-provider.service';
 
@@ -21,6 +19,7 @@ import { ProductComponent } from './product/product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -31,18 +30,16 @@ import { ContactComponent } from './contact/contact.component';
     ProductComponent,
     ShoppingCartComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MdTableModule,
     MdButtonModule,
     MdIconModule,
     MdSnackBarModule,
-    DataTableModule,
-    SharedModule,
     FormsModule,
     RouterModule.forRoot([
       {
@@ -59,6 +56,9 @@ import { ContactComponent } from './contact/contact.component';
       },
       {
         path: 'cart', component: ShoppingCartComponent
+      },
+      {
+        path: 'details/:id', component: ProductDetailsComponent
       }
     ])
   ],
