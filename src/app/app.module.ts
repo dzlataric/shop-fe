@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MdButtonModule, MdIconModule, MdSnackBarModule} from '@angular/material';
 
 import { DataProviderService } from './data-provider.service';
+import { AuthenticationServiceService } from './security/authentication-service.service';
+import { HeaderService } from './shared/header.service';
 
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
@@ -20,6 +22,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     ShoppingCartComponent,
     AboutComponent,
     ContactComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +46,9 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     MdSnackBarModule,
     FormsModule,
     RouterModule.forRoot([
+      {
+        path: 'login', component: LoginComponent
+      },
       {
         path: 'about', component: AboutComponent
       },
@@ -62,7 +69,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
       }
     ])
   ],
-  providers: [DataProviderService],
+  providers: [AuthenticationServiceService, DataProviderService, HeaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

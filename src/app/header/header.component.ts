@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataProviderService } from '../data-provider.service';
+import { HeaderService } from '../shared/header.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,14 +10,31 @@ import { DataProviderService } from '../data-provider.service';
 })
 export class HeaderComponent implements OnInit {
 
-  inCart = this.dataProviderService.getData().length;
+  showLogout: boolean = false;
+  inCart: number = 0;
 
-  constructor(private dataProviderService: DataProviderService) {
-  	console.log('In cart: ' + this.inCart);
+  constructor(
+  	private router: Router,
+    private headerService: HeaderService
+  ) {
+    headerService.showMenuEvent.subscribe(
+      (showMenu) => {
+        this.showLogout = !this.showLogout;
+      }
+    );
+    headerService.changeInCart.subscribe(
+      (inCart) => {
+        this.inCart = inCart;
+      }
+    );
   }
+
 
   ngOnInit() {
   }
 
+  logout() {
+  	this.router.navigate(['login']);
+  }
 
 }

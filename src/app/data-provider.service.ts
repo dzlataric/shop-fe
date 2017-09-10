@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { CartItem } from './types/cart-item';
 import { CheckoutItem } from './types/checkout-item';
 
