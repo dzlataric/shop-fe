@@ -1,47 +1,43 @@
 <!-- Fixed navbar -->
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-top">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" routerLink="/">On-Pharm</a>
+      <a class="navbar-brand" routerLink="/">Online-Pharm</a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li>
-          <div>
-            <a md-fab routerLink="/">
-              <md-icon>home</md-icon>
-            </a>
-          </div>
-        </li>
-         <li>
-          <a md-button routerLink="/about">About</a>
-        </li>
-        <li>
-          <a md-button routerLink="/contact">Contact</a>
-        </li>
-        <li>
-          <a md-button routerLink="/products">Products</a>
-        </li>
-        <li>
-          <a md-button routerLink="/categories">Categories</a>
-        </li>  
-      </ul>
-      <div class="navbar-btn btn-toolbar pull-right">
+      <div class="navbar-btn btn-toolbar">
+        <button class="btn btn-primary" type="button" routerLink="/">
+          <span class="glyphicon glyphicon glyphicon-home button-text"></span>
+        </button>
+        <button class="btn btn-primary" routerLink="/about">
+          <span class="button-text">
+            About
+          </span>
+        </button>
+        <button class="btn btn-primary" routerLink="/contact">
+          <span class="button-text">  
+            Contact
+          </span>  
+        </button>
+        <button class="btn btn-primary" routerLink="/products">
+          <span class="button-text">
+            Products
+          </span>
+        </button>
+        <button class="btn btn-primary" routerLink="/categories">
+          <span class="button-text">
+            Categories
+          </span>
+        </button>
         <button class="btn btn-primary cart" type="button" routerLink="/cart">
           Cart
           <span class="glyphicon glyphicon-shopping-cart"></span>
           <span class="badge">{{inCart}}</span>
         </button>
-        <button class="btn btn-primary right" type="button">
+        <button class="btn btn-primary cart" type="button" *ngIf="!showLogoutButton" (click)="logout()">
           Log in
         </button>
-         <button class="btn btn-primary right" type="button" *ngIf="showLogout" (click)="logout()">
+         <button class="btn btn-primary cart" type="button" *ngIf="showLogoutButton" (click)="logout()">
           Log out
         </button>
       </div>

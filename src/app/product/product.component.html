@@ -2,7 +2,7 @@
   <div class="form-inline">
       <input type="text" class="form-control input-field left" style="width: 30%" placeholder="Filter by name..."
       [(ngModel)]="search" (keyup)="onFilter($event)">
-       <button class="btn btn-primary right" type="button" (click)="addNew()">
+       <button *ngIf="username == 'admin'" class="btn btn-primary right" type="button" (click)="addNew()">
           Add
       </button>
   </div>
@@ -31,10 +31,10 @@
           </button>
         </td>
         <td>
-           <button type="button" class="btn btn-xs btn-success" (click)="addToCart(product)">
+           <button *ngIf="product.stock > 0" type="button" class="btn btn-xs btn-success" (click)="addToCart(product)">
               <span class="glyphicon glyphicon-shopping-cart"></span>
            </button>
-           <button type="button" class="btn btn-xs btn-danger" (click)="remove()">
+           <button *ngIf="username == 'admin'" type="button" class="btn btn-xs btn-danger" (click)="remove()">
               <span class="glyphicon glyphicon-remove-circle"></span>
            </button>
         </td>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { AuthenticationServiceService } from '../security/authentication-service.service';
+import { AuthenticationService } from '../security/authentication-service.service';
 import { HeaderService } from '../shared/header.service';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   
   @Output() onDatePicked: EventEmitter<any> = new EventEmitter<any>();
 
-  showMenu: boolean = false;
+  loggedIn: boolean = false;
 
   model: any = {};
   loading = false;
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
   	private router: Router,
-    private auth: AuthenticationServiceService,
+    private auth: AuthenticationService,
     private headerService: HeaderService
   ) { }
 
@@ -28,18 +28,18 @@ export class LoginComponent implements OnInit {
     this.auth.logout();
   }
 
-  toggleMenu() {
-    this.showMenu = !this.showMenu;
-    this.headerService.showMenuEvent.emit(this.showMenu);
+  toggleMenu(isLoggedIn: boolean) {
+    this.loggedIn = isLoggedIn;
+    this.headerService.showLogInEvent.emit(this.loggedIn);
   }
 
   login() {
   	this.loading = true;
   	this.auth.login(this.model.username, this.model.password).subscribe(result => {
-  		console.log('Result: '+ result);
 		if (result === true) {
 	        // login successful
-	        this.router.navigate(['categories']);
+          this.headerService.showLogInEvent.emit(true);
+	        this.router.navigate(['/']);
 	    } else {
 	        // login failed
 	        this.error = 'Username or password is incorrect';

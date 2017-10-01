@@ -29,7 +29,7 @@ export class DataProviderService {
 
   checkout(): CheckoutItem[] {
   	for (var i = this.cartItems.length - 1; i >= 0; i--) {
-  		let checkoutItem: CheckoutItem = { id: this.cartItems[i].productId, amount: this.cartItems[i].amount };
+  		let checkoutItem: CheckoutItem = { productId: this.cartItems[i].productId, amount: this.cartItems[i].amount };
   		this.checkoutItems.push(checkoutItem);
   	}
   	return this.checkoutItems;

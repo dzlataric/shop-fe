@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
 import { DataProviderService } from '../data-provider.service';
-import { AuthenticationServiceService } from '../security/authentication-service.service';
+import { AuthenticationService } from '../security/authentication-service.service';
 import { HeaderService } from '../shared/header.service';
 import { Product } from '../types/product';
 
@@ -20,10 +20,15 @@ export class ProductComponent implements OnInit {
   search: string;
   baseParameters: string = '/products?page=1&pageSize=6&search=';
   inCart: Product[];	
+  username: string;
+
+  private headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', 'Bearer ' + this.auth.getToken());
 
   constructor(
     private http: HttpClient,
-    private auth: AuthenticationServiceService,
+    private auth: AuthenticationService,
     private router: Router,
     private snackBar: MdSnackBar,
     private dataProviderService: DataProviderService,
@@ -32,17 +37,19 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.http.get<Product[]>(environment.API_URL + this.baseParameters, {
-       headers: new HttpHeaders().set('Content-Type', 'application/json')
-         .set('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1MDUwNzI2OTc4OTEsImV4cCI6MTUwNTY3NzQ5NywiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XX0.sbCgQEbMXtYV9p-Yq3c0nxFkMaRpyEb2AeYZcySnFY6Tz6WNtj5sSaE3YhR-d6pO6CjbPFr8sdSUp1TS8RnSdQ')
+       headers: this.headers
     }).subscribe(data => {
       this.products = data;
+      this.username = this.auth.getUsername();
     }, err => {
-      //this.router.navigate(['login']);
+      this.router.navigate(['login']);
     });
   }
 
   onFilter(event: any) {
-    this.http.get<Product[]>(environment.API_URL + this.baseParameters + this.search).subscribe(data => {
+    this.http.get<Product[]>(environment.API_URL + this.baseParameters + this.search, {
+       headers: this.headers
+    }).subscribe(data => {
       this.products = data;
     });
   }
