@@ -60,7 +60,7 @@ import { LoginComponent } from './login/login.component';
         path: 'categories', component: CategoryComponent
       },
       {
-        path: 'products', component: ProductComponent, canActivate: [AuthGuardService]
+        path: 'products', component: ProductComponent/*, canActivate: [AuthGuardService]*/
       },
       {
         path: 'cart', component: ShoppingCartComponent

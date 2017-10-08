@@ -74,10 +74,12 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  remove() {
+  remove(id: number) {
+    this.http.delete(environment.API_URL + '/' + id).subscribe();
     this.snackBar.open('Not possible to remove product at the moment!', 'Will be added later.', {
       duration: 2000,
     });
+    this.router.navigate(['products']);
   }
 
 }
