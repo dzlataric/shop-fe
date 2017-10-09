@@ -11,13 +11,14 @@ import { ProductDetails } from '../types/product-details';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  details: ProductDetails;
+  product_details: ProductDetails;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit() {
   	this.http.get<ProductDetails>(environment.API_URL + '/products/' +this.route.snapshot.paramMap.get('id')).subscribe(data => {
-      this.details = data;
+      this.product_details = data;
+      console.log(this.product_details);
     });
   }
 
