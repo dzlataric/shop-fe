@@ -14,8 +14,11 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  login(username: string, password: string): Observable<boolean> {
-    this.http.post(this.authUrl, JSON.stringify({username: username, password: password}), {
+  login(username: string, password: string)/*: Observable<boolean>*/ {
+    localStorage.setItem('user', username);
+    this.isLoggedIn =  true;
+
+    /*this.http.post(this.authUrl, JSON.stringify({username: username, password: password}), {
         headers: new HttpHeaders().set('Content-Type', 'application/json'),
     }).subscribe(data => {
       this.auth = data;
@@ -24,12 +27,13 @@ export class AuthenticationService {
     }, err => {
       this.isLoggedIn =  false;
     });
-    return Observable.of(this.isLoggedIn);
+    return Observable.of(this.isLoggedIn);*/
    }
 
   logout(): void {
 	  // clear token remove user from local storage to log user out
-	  localStorage.removeItem('currentUser');
+	  //localStorage.removeItem('currentUser');
+    localStorage.removeItem('user');
     // redirect to login page
     this.router.navigate(['login']);
   }
@@ -40,15 +44,25 @@ export class AuthenticationService {
     return token ? token : "";
   }
 
-  getUsername(): string {
+  /*getUsername(): string {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     let username = currentUser && currentUser.username;
     return username ? username : "";
+  }*/
+
+  getUsername(): string {
+    let user = JSON.parse(localStorage.getItem('user'));
+    return user ? user : "";
   }
 
-  isUserLoggedIn(): boolean {
+  /*isUserLoggedIn(): boolean {
     var token: String = this.getToken();
     return token && token.length > 0;
+  }*/
+
+  isUserLoggedIn(): boolean {
+    let username = JSON.parse(localStorage.getItem('user'));
+    return username ? username : "";
   }
 
 }

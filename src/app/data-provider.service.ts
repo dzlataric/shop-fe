@@ -27,6 +27,11 @@ export class DataProviderService {
   	 this.cartItems.splice(this.findIndex(id), 1);
   }
 
+  removeAll() {
+    this.cartItems.splice(0);
+    this.checkoutItems.splice(0);
+  }
+
   checkout(): CheckoutItem[] {
   	for (var i = this.cartItems.length - 1; i >= 0; i--) {
   		let checkoutItem: CheckoutItem = { productId: this.cartItems[i].productId, amount: this.cartItems[i].amount };

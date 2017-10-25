@@ -9,9 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
-  @Output() onDatePicked: EventEmitter<any> = new EventEmitter<any>();
-
+ 
   loggedIn: boolean = false;
 
   model: any = {};
@@ -35,7 +33,9 @@ export class LoginComponent implements OnInit {
 
   login() {
   	this.loading = true;
-  	this.auth.login(this.model.username, this.model.password).subscribe(result => {
+  	this.headerService.showLogInEvent.emit(true);
+    this.router.navigate(['products']);
+    /*this.auth.login(this.model.username, this.model.password).subscribe(result => {
 		if (result === true) {
 	        // login successful
           this.headerService.showLogInEvent.emit(true);
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
   	}, err => {
   		this.loading = false;
         this.error = err;
-  	})
+  	})*/
   }
 
 }

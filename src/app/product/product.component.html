@@ -2,8 +2,8 @@
   <div class="form-inline">
       <input type="text" class="form-control input-field left" style="width: 30%" placeholder="Filter by name..."
       [(ngModel)]="search" (keyup)="onFilter($event)">
-       <button *ngIf="username == 'admin'" class="btn btn-primary right" type="button" (click)="addNew()">
-          Add
+      <button class="btn btn-md btn-primary right" style="color: #69f0ae" type="button" (click)="addNew()">
+             <span class="glyphicon glyphicon-plus"></span>
       </button>
   </div>
   <table class="table table-striped">
@@ -12,7 +12,7 @@
         <th class="table-header">ID</th>
         <th class="table-header">Name</th>
         <th class="table-header">In stock</th>
-        <th class="table-header">Price(€)</th>
+        <th class="table-header">Price</th>
         <th class="table-header">Category</th>
         <th class="table-header">Details</th>
         <th class="table-header"></th>
@@ -34,11 +34,18 @@
            <button *ngIf="product.stock > 0" type="button" class="btn btn-xs btn-success" (click)="addToCart(product)">
               <span class="glyphicon glyphicon-shopping-cart"></span>
            </button>
-           <button *ngIf="username == 'admin'" type="button" class="btn btn-xs btn-danger" (click)="remove()">
+           <button type="button" class="btn btn-xs btn-danger" (click)="remove(product.id)">
               <span class="glyphicon glyphicon-remove-circle"></span>
            </button>
         </td>
       </tr>
+      <!-- <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td>
+        <td>
+          Page: 
+          <input type="text" name="page" style="width: 25px" placeholder="1">
+        </td>
+      </tr> -->
     </tbody>
   </table>
 </div>

@@ -24,6 +24,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { LoginComponent } from './login/login.component';
+import { NewProductComponent } from './new-product/new-product.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LoginComponent } from './login/login.component';
     AboutComponent,
     ContactComponent,
     ProductDetailsComponent,
-    LoginComponent
+    LoginComponent,
+    NewProductComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,9 @@ import { LoginComponent } from './login/login.component';
       },
       {
         path: 'details/:id', component: ProductDetailsComponent
+      },
+      {
+        path: 'new', component: NewProductComponent
       }
     ])
   ],

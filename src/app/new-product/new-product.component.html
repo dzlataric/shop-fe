@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="well well-sm">
+          <form class="form-horizontal" (ngSubmit)="onSubmit()">
+          <fieldset>
+            <legend class="text-center">Add new</legend>
+    
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Name</label>
+              <div class="col-md-9">
+                <input id="name" name="name" type="text" class="form-control">
+              </div>
+            </div>
+    
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="email">In stock</label>
+              <div class="col-md-9">
+                <input id="stock" name="stock" type="number" class="form-control">
+              </div>
+            </div>
+    
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Price</label>
+              <div class="col-md-9">
+               <input id="price" name="price" type="number" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Category</label>
+              <div class="col-md-9">
+                <input id="category" name="category" type="text" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Country</label>
+              <div class="col-md-9">
+                <input id="country" name="country" type="text" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Manufacturer</label>
+              <div class="col-md-9">
+                <input id="manufacturer" name="manufacturer" type="text" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Production year</label>
+              <div class="col-md-9">
+                <input id="prod" name="prod" type="number" class="form-control">
+              </div>
+            </div>
+
+            <!-- Form actions -->
+            <div class="form-group">
+              <div class="col-md-12 text-right">
+                <button type="submit" class="btn btn-primary btn-lg">
+                	<span style="color: #69f0ae">
+                		Submit
+                	</span>
+                </button>
+              </div>
+            </div>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+  </div>
+</div>

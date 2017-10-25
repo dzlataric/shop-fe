@@ -6,4 +6,9 @@ export interface Product {
   category: string;
   categoryId: number;
   detailsId: number;
+  country: string;
+  manufacturer: string;
+  productionYear: number;
+  image: string;
+  expiryDate: string;
 }

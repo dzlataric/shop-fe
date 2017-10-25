@@ -29,15 +29,18 @@
             Categories
           </span>
         </button>
-        <button class="btn btn-primary cart" type="button" routerLink="/cart">
+        <button class="btn btn-primary cart" type="button" *ngIf="showLogoutButton" (click)="sendReport()">
+          <span>Send report </span>
+        </button>
+        <button class="btn btn-primary cart" type="button" routerLink="/cart" *ngIf="showLogoutButton">
           Cart
           <span class="glyphicon glyphicon-shopping-cart"></span>
           <span class="badge">{{inCart}}</span>
         </button>
         <button class="btn btn-primary cart" type="button" *ngIf="!showLogoutButton" (click)="logout()">
-          Log in
+          <span>Log in</span>
         </button>
-         <button class="btn btn-primary cart" type="button" *ngIf="showLogoutButton" (click)="logout()">
+        <button class="btn btn-primary cart" type="button" *ngIf="showLogoutButton" (click)="logout()">
           Log out
         </button>
       </div>

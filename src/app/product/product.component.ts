@@ -18,7 +18,7 @@ export class ProductComponent implements OnInit {
 
   products: Product[];
   search: string;
-  baseParameters: string = '/products?page=1&pageSize=6&search=';
+  baseParameters: string = '/products?page=1&pageSize=10&search=';
   inCart: Product[];	
   username: string;
 
@@ -57,29 +57,32 @@ export class ProductComponent implements OnInit {
   addToCart(product: Product) {
     this.dataProviderService.setData(product.id, product.name, product.category, product.price);
     this.headerService.changeInCart.emit(this.dataProviderService.getData().length);
-    this.snackBar.open('Added to cart: ' + product.name, 'Price: ' + product.price + '€', {
-      duration: 2000,
-    });
-  }
-  getDetails(id: number) {
-    this.router.navigate(['/details/' + id]); 
-    this.snackBar.open('Product detais are not available at the moment!', 'ID: ' + id, {
-      duration: 2000,
-    });
+    this.showMessage('Added to cart: ' + product.name, 'Price: ' + product.price);
   }
 
-  addNew() {
-    this.snackBar.open('Not possible to add new product at the moment!', 'Will be added later.', {
-      duration: 2000,
-    });
+  getDetails(id: number) {
+    this.router.navigate(['/details/' + id]); 
+    this.showMessage('Showing product detais!', 'Product id: ' + id);
   }
 
   remove(id: number) {
-    this.http.delete(environment.API_URL + '/' + id).subscribe();
-    this.snackBar.open('Not possible to remove product at the moment!', 'Will be added later.', {
+    this.http.delete(environment.API_URL + '/products/' + id, {
+      headers: this.headers
+    }).subscribe();
+    this.showMessage('Element removed!', 'ID: ' + id);
+    this.ngOnInit();
+    this.router.navigate(['products']);
+  }
+
+  addNew() {
+    this.showMessage('Element added!', undefined);
+    this.router.navigate(['new']);
+  }
+
+  showMessage(title: string, additional: string) {
+    this.snackBar.open(title, additional, {
       duration: 2000,
     });
-    this.router.navigate(['products']);
   }
 
 }

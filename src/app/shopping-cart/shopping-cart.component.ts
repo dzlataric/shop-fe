@@ -7,6 +7,7 @@ import { CheckoutItem } from '../types/checkout-item';
 import { AuthenticationService } from '../security/authentication-service.service';
 import { DataProviderService } from '../data-provider.service';
 import { HeaderService } from '../shared/header.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -27,7 +28,8 @@ export class ShoppingCartComponent implements OnInit {
     private snackBar: MdSnackBar,
     private auth: AuthenticationService,
     private dataProviderService: DataProviderService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -37,7 +39,7 @@ export class ShoppingCartComponent implements OnInit {
 
   updatePrice() {
     for (var i = this.dataProviderService.getData().length - 1; i >= 0; i--) {
-      this.total = this.total + this.dataProviderService.getData()[i].price;
+      this.total = this.total + (this.dataProviderService.getData()[i].price * this.dataProviderService.getData()[i].amount);
     }
   }
 
@@ -50,13 +52,12 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   checkout() {
-    
-    this.http.post(environment.API_URL + '/checkout/' + this.auth.getUsername(), this.dataProviderService.checkout(), {
+    this.http.post(environment.API_URL + '/checkout/' + 'admin', this.dataProviderService.checkout(), {
       headers: this.headers
     }).subscribe( );
-    
-    this.snackBar.open('Not possible to checkout at the moment!', 'Will be added later.', {
-      duration: 2000,
-    });
+    this.dataProviderService.removeAll();
+    this.headerService.changeInCart.emit(this.dataProviderService.getData().length);
+    this.router.navigate(['products']);
+    alert(this.dataProviderService.checkout().length);
   }
 }
